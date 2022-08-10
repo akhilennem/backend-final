@@ -18,7 +18,7 @@ public interface DetailRepository extends CrudRepository<Details,String> {
 
     void deleteByEmail(String email);
 
-
+ Details getByEmail(String email);
 
 
 }
