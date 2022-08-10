@@ -40,9 +40,12 @@ public class OtpController {
 @Autowired
 public UserRepository userRepository;
     @Autowired
+    public DetailRepository detailRepository;
+    @Autowired
     AuthenticationManager authenticationManager;
     @Autowired
     PasswordEncoder encoder;
+
 
 
 @GetMapping("/send")
