@@ -2,8 +2,10 @@ package com.attendance.login.RestController.UserControl;
 
 import com.attendance.login.RestController.Genarator;
 import com.attendance.login.RestController.model.Details;
+import com.attendance.login.RestController.model.QrCode;
 import com.attendance.login.RestController.model.User1;
 import com.attendance.login.RestController.repository.DetailRepository;
+import com.attendance.login.RestController.repository.QrRepo;
 import com.attendance.login.RestController.repository.UserRepository1;
 import com.attendance.login.RestController.services.DetailsServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class Controller {
     public UserRepository1 userRepository1;
 
     @Autowired
+    public QrRepo qrRepo;
+
+    @Autowired
     public Genarator genarator;
 
     public String i;
@@ -50,8 +55,10 @@ public class Controller {
     public String Test() {
         rsp = 0;
         String verify = genarator.generateRandom(20);
-        System.out.println(verify);
-        i = verify;
+        QrCode qrCode=new QrCode();
+
+        qrCode.para = verify;
+        qrRepo.save(qrCode);
         return verify;
     }
 
@@ -61,7 +68,8 @@ public class Controller {
 
         LocalDate date = LocalDate.now();
 
-        if (i.equals(user2.para)) {
+//        if (i.equals(user2.para))
+          if(qrRepo.existsByPara(user2.para))     {
 
             if (userRepository1.existsByPara(user2.para)) {
 
@@ -91,7 +99,7 @@ public class Controller {
                         rsp = 100;
                         User1 user4;
                         user4 = userRepository1.getByDateAndEmail(date, user2.getEmail());
-                        if (user4.first_out.contains("AM") || user4.first_out.contains("PM")) {
+                        if (user4.first_out.contains("am") || user4.first_out.contains("pm")) {
                             return new ResponseEntity<>(HttpStatus.GONE);
                         } else {
 
@@ -114,7 +122,7 @@ public class Controller {
                         rsp = 100;
                         User1 user4;
                         user4 = userRepository1.getByDateAndEmail(date, user2.getEmail());
-                        if (user4.second_In.contains("AM") || user4.second_In.contains("PM")) {
+                        if (user4.second_In.contains("am") || user4.second_In.contains("pm")) {
                             return new ResponseEntity<>(HttpStatus.OK);
                         } else {
 
@@ -136,7 +144,7 @@ public class Controller {
                         rsp = 100;
                         User1 user4;
                         user4 = userRepository1.getByDateAndEmail(date, user2.getEmail());
-                        if (user4.second_out.contains("AM") || user4.second_out.contains("PM")) {
+                        if (user4.second_out.contains("am") || user4.second_out.contains("pm")) {
                             return new ResponseEntity<>(HttpStatus.GONE);
                         } else {
 
@@ -153,6 +161,8 @@ public class Controller {
 
             } else {
 if(user2.last.equals("out")) {
+
+
     return new ResponseEntity<>(HttpStatus.SERVICE_UNAVAILABLE);
 }
     else {
@@ -164,7 +174,7 @@ if(user2.last.equals("out")) {
 
         User1 user4;
         user4 = userRepository1.getByDateAndEmail(date, user2.getEmail());
-        if (user4.first_In.contains("AM") || user2.first_In.contains("PM")) {
+        if (user4.first_In.contains("am") || user2.first_In.contains("pm")) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
 
