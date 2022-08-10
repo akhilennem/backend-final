@@ -55,7 +55,7 @@ public class Controller {
         return verify;
     }
 
-    @PostMapping("/save")
+        @PostMapping("/save")
     public ResponseEntity AddUser(@RequestBody User1 user2,String time){
         System.out.println("time is "+time);
 
@@ -181,8 +181,6 @@ if(user2.last.equals("out")) {
         }
         return null;
     }
-
-
 
 
     @PostMapping("/response")
