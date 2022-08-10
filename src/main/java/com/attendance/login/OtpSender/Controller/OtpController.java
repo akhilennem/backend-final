@@ -5,6 +5,10 @@ import com.attendance.login.OtpSender.OtpRepository.OtpRepository;
 import com.attendance.login.OtpSender.OtpVerifier.OtpVerifier;
 import com.attendance.login.OtpSender.Otpmodel.Mail;
 import com.attendance.login.OtpSender.service.MailService;
+import com.attendance.login.RestController.model.Details;
+import com.attendance.login.RestController.model.User1;
+import com.attendance.login.RestController.repository.DetailRepository;
+import com.attendance.login.RestController.repository.UserRepository1;
 import com.attendance.login.UserPackage.models.User;
 import com.attendance.login.UserPackage.repository.RoleRepository;
 import com.attendance.login.UserPackage.repository.UserRepository;
@@ -37,6 +41,9 @@ public class OtpController {
     @Autowired
     public RoleRepository roleRepository;
 
+//    @Autowired
+//    public User1 user3;
+
 @Autowired
 public UserRepository userRepository;
     @Autowired
@@ -45,7 +52,6 @@ public UserRepository userRepository;
     AuthenticationManager authenticationManager;
     @Autowired
     PasswordEncoder encoder;
-
 
 
 @GetMapping("/send")
@@ -90,7 +96,6 @@ public UserRepository userRepository;
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 
     @GetMapping("/forget-password")
     public ResponseEntity<?> passwordReset(@RequestParam int otp, String email) {
