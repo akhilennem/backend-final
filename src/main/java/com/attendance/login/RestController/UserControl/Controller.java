@@ -91,7 +91,7 @@ public class Controller {
                         rsp = 100;
                         User1 user4;
                         user4 = userRepository1.getByDateAndEmail(date, user2.getEmail());
-                        if (user4.first_out.contains("am") || user4.first_out.contains("pm")) {
+                        if (user4.first_out.contains("AM") || user4.first_out.contains("PM")) {
                             return new ResponseEntity<>(HttpStatus.GONE);
                         } else {
 
@@ -114,7 +114,7 @@ public class Controller {
                         rsp = 100;
                         User1 user4;
                         user4 = userRepository1.getByDateAndEmail(date, user2.getEmail());
-                        if (user4.second_In.contains("am") || user4.second_In.contains("pm")) {
+                        if (user4.second_In.contains("AM") || user4.second_In.contains("PM")) {
                             return new ResponseEntity<>(HttpStatus.OK);
                         } else {
 
@@ -136,7 +136,7 @@ public class Controller {
                         rsp = 100;
                         User1 user4;
                         user4 = userRepository1.getByDateAndEmail(date, user2.getEmail());
-                        if (user4.second_out.contains("am") || user4.second_out.contains("pm")) {
+                        if (user4.second_out.contains("AM") || user4.second_out.contains("PM")) {
                             return new ResponseEntity<>(HttpStatus.GONE);
                         } else {
 
@@ -164,7 +164,7 @@ if(user2.last.equals("out")) {
 
         User1 user4;
         user4 = userRepository1.getByDateAndEmail(date, user2.getEmail());
-        if (user4.first_In.contains("am") || user2.first_In.contains("pm")) {
+        if (user4.first_In.contains("AM") || user2.first_In.contains("PM")) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
 
