@@ -266,4 +266,15 @@ public ResponseEntity dlt(@RequestBody String email) {
 
   return new ResponseEntity(HttpStatus.OK);
 }
+    @RequestMapping("/delete-admin")
+  public ResponseEntity dltadmin(@RequestBody String email) {
+    String username = email;
+//    detailRepository.deleteByEmail(email);
+    userRoleRepo.deleteByUserid(email);
+    userRepository.deleteByUsername(username);
+
+    return new ResponseEntity(HttpStatus.CONTINUE);
+  }
+}
+  
 }
