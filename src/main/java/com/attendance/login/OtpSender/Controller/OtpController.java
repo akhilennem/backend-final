@@ -52,6 +52,9 @@ public UserRepository userRepository;
         if
         (userRepository.existsByEmail(email)) {
 
+           details =  detailRepository.getByEmail(email);
+            String name= details.name;
+
             String verify = genarator.generateRandom(4);
             System.out.println(verify);
             i = Integer.parseInt(verify);
@@ -62,13 +65,22 @@ public UserRepository userRepository;
             otpVerifier.setOtp(i);
             otpRepository.save(otpVerifier);
 
-            Mail mail = new Mail();
+
+                        Mail mail = new Mail();
             mail.setMailFrom("akhilennem@gmail.com");
             mail.setMailTo(email);
             mail.setMailSubject("PTF ATTENDANCE APP Password Reset OTP");
-            mail.setMailContent("\uD835\uDC80\uD835\uDC90\uD835\uDC96\uD835\uDC93 \uD835\uDC76\uD835\uDC8F\uD835\uDC86 \uD835\uDC7B\uD835\uDC8A\uD835\uDC8E\uD835\uDC86 \uD835\uDC77\uD835\uDC82\uD835\uDC94\uD835\uDC94\uD835\uDC98\uD835\uDC90\uD835\uDC93\uD835\uDC85 (\uD835\uDC76\uD835\uDC7B\uD835\uDC77) \uD835\uDC70\uD835\uDC94 : "+i);
-//            mail.setMailContent(String.valueOf(i));
+            mail.setMailContent("Hi " + name +",\n" +
+                    "\n" +
+                    "We received a request to access your PTF Account "+ email+ " through your email address. Your PTF verification code is:\n" +
+                    "\n "
+                                                          + i + "\n" +
+                    "\n If you did not request this code, it is possible that someone else is trying to access the PTF Account "+ email+ ". Do not forward or give this code to anyone.\n"+
+            "Sincerely yours,\n" +
+                    "The PTF Team ");
+
             mailService.sendEmail(mail);
+
 
             return new ResponseEntity<>(HttpStatus.OK);
         }
