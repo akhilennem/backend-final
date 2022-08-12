@@ -50,7 +50,7 @@ public class Controller {
     @Autowired
     public DetailsServices detailService;
 
-    @GetMapping("/qr-generator")
+       @GetMapping("/qr-generator")
 
     public String Test() {
         rsp = 0;
